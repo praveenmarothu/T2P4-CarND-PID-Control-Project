@@ -3,6 +3,25 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+There are 3 basic elements of a PID controller 
+
+* P - Proportional
+* I - Integral
+* D - Derivative
+
+Each of these components have a specific effect on the controller. 
+
+The PID controller runs in a feedback loop and uses the error value from the system. In our case it is the CTE ( Cross Track Error )
+
+This project tuning the parameters has been a time taking process. 
+
+In an attempt to understand and practically observe the effect of each component, I tuned the parameters manually. I supplied a set of values and restarted the simulator programatically for each of these values and monitored the vehicle path.
+
+
+
+
+
+---
 ## Dependencies
 
 * cmake >= 3.5
