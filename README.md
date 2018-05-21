@@ -17,9 +17,47 @@ This project tuning the parameters has been a time taking process.
 
 In an attempt to understand and practically observe the effect of each component, I tuned the parameters manually. I supplied a set of values and restarted the simulator programatically for each of these values and monitored the vehicle path.
 
+* Kp
+The value of Kp was directly proportional to the steering angle of the car. The higher the value of Kp the sharper the steering angle of the car. Tuning this parameter especially on the curves was challanging. The lower value could not keep the car in the track as the steering angle was small and a higher value made the car the come back to track but creater sharp oscillations.
+
+* Ki
+The Ki parameter is an integral term that tries to eliminate this residual error by adding a historic cumulative value of the error. Its likely that there would be residual error after applying the proportional control. This ends up causing a bias over a long period of time that avoids the car to get in the exact trajectory.
+In my case changing Ki had very little visible effect. There was a little stabilization after adding a value for Ki.
+
+* Kd
+Kp is the amount of correction to apply . This means that for a large value when the error is small will lead to overshoot and , if the controller were to apply a large correction in the opposite direction and repeatedly overshoot the desired position, the output would oscillate.
+The Kd param helped with reducing the oscillating effect of the Kp param. The Kd was tuned for each of the Kp values to make sure that the car would not oscillate for small errors and at the same time negotiate tight turns correctly without creating a oscillating effect.
+Kd is a derivative term and does not consider the error but the rate of change od error. It tries to bring this rate of change of error to Zero.
+
+### Videos
+
+Only P Controller. 
+```cpp
+pid.Init( 0.12 , 0 , 0 );
+```
+
+https://youtu.be/GMvlFiZrT64
+
+[![](imgs/p.png)](https://youtu.be/GMvlFiZrT64)
+
+PD Controller. 
+```cpp
+pid.Init( 0.12 , 0 , 3 );
+```
+
+https://youtu.be/_N7IS2L5g1w
+
+[![](imgs/pd.png)](https://youtu.be/_N7IS2L5g1w)
 
 
+PID Controller. 
+```cpp
+pid.Init( 0.12 , 0.0009 , 3 );
+```
 
+https://youtu.be/HDsHO7-0m3E
+
+[![](imgs/pd.png)](https://youtu.be/HDsHO7-0m3E)
 
 ---
 ## Dependencies
